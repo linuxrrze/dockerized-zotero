@@ -35,7 +35,6 @@ sed -i "s#'s3.amazonaws.com'#Z_CONFIG::\$S3_ENDPOINT#g" ./include/Zend/Service/A
 sed -i "s#'http://'.self::S3_ENDPOINT#self::S3_ENDPOINT#g" ./include/Zend/Service/Amazon/S3.php
 sed -i "s#parent::__construct(\$args)#\$args\['use_path_style_endpoint'\] = true;parent::__construct(\$args)#g" ./vendor/aws/aws-sdk-php/src/S3/S3Client.php
 sed -i 's#"https://" . Z_CONFIG::\$S3_BUCKET . ".s3.amazonaws.com/"#Z_CONFIG::\$S3_ENDPOINT . "/" . Z_CONFIG::\$S3_BUCKET . "/"#g' ./model/Storage.inc.php
-#sed -i "s#\$awsConfig = \[#\$awsConfig = \['endpoint' => Z_CONFIG::\$S3_ENDPOINT,'scheme' => 'http',#g" ./include/header.inc.php
 sed -i "s#\$awsConfig = \[#\$awsConfig = \['endpoint' => Z_CONFIG::\$S3_ENDPOINT,#g" ./include/header.inc.php
 
 aws --endpoint-url "$AWS_ENDPOINT_URL" s3 mb s3://zotero
