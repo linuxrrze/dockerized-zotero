@@ -132,3 +132,14 @@ services:
       - minio
       - tinymce-clean-server
     restart: always
+
+  web-library:
+    image: zotero-web-library
+    container_name: zotero-web-library
+    build:
+      context: ./web-library
+      dockerfile: Dockerfile
+    hostname: localhost.localdomain
+    ports:
+      - ${WEB_LIBRARY_PORT}:8001
+    restart: always
