@@ -34,9 +34,12 @@ aws --endpoint-url "$AWS_ENDPOINT_URL" s3 mb s3://zotero
 aws --endpoint-url "$AWS_ENDPOINT_URL" s3 mb s3://zotero-fulltext
 aws --endpoint-url "$AWS_LOCALSTACK_ENDPOINT_URL" sns create-topic --name zotero
 
+# Maybe disable rinetd forwarding?
+if [ "x$ENABLE_S3_FORWARDING" != "no" ]; then
 # Start rinetd
 echo "0.0.0.0		$S3_SERVER_PORT		minio		$S3_SERVER_PORT" > /etc/rinetd.conf
 /etc/init.d/rinetd start
+fi
 
 # Upgrade database
 /init-mysql.sh
