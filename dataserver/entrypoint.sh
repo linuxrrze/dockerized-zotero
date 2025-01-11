@@ -37,8 +37,8 @@ sed -i "s#parent::__construct(\$args)#\$args\['use_path_style_endpoint'\] = true
 sed -i 's#"https://" . Z_CONFIG::\$S3_BUCKET . ".s3.amazonaws.com/"#Z_CONFIG::\$S3_ENDPOINT . "/" . Z_CONFIG::\$S3_BUCKET . "/"#g' ./model/Storage.inc.php
 sed -i "s#\$awsConfig = \[#\$awsConfig = \['endpoint' => Z_CONFIG::\$S3_ENDPOINT,#g" ./include/header.inc.php
 
-aws --endpoint-url "$AWS_ENDPOINT_URL" s3 mb s3://zotero
-aws --endpoint-url "$AWS_ENDPOINT_URL" s3 mb s3://zotero-fulltext
+aws --endpoint-url "$AWS_S3_ENDPOINT_URL" s3 mb s3://zotero
+aws --endpoint-url "$AWS_S3_ENDPOINT_URL" s3 mb s3://zotero-fulltext
 aws --endpoint-url "$AWS_LOCALSTACK_ENDPOINT_URL" sns create-topic --name zotero
 
 # Maybe disable rinetd forwarding?
