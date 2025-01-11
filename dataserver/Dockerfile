@@ -59,6 +59,8 @@ RUN composer install
 COPY ./init/www.sql /var/www/zotero/misc/www.sql
 
 # Set the entrypoint file
-COPY ./entrypoint.sh ./init/init-mysql.sh ./scripts/* /
-RUN chmod +x /*.sh
+COPY ./entrypoint.sh /
+RUN mkdir /scripts
+COPY ./init/init-mysql.sh ./scripts/* /scripts
+RUN chmod +x /*.sh /scripts/*.sh
 ENTRYPOINT ["/entrypoint.sh"]
