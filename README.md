@@ -53,6 +53,7 @@ The source code is downloaded when the docker image is created. To upgrade and d
 | S3 API        | http://localhost:9000  | -        |  -            |
 | PHPMyAdmin    | http://localhost:3000  | root     |  zotero       |
 | S3 Web UI     | http://localhost:4000  | zotero   |  zoterodocker |
+| Web Library   | http://localhost:8001  | -        |  -            |
 
 *Data location*:
 
