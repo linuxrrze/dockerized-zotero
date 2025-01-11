@@ -46,9 +46,9 @@ services:
     restart: always
 
   memcached:
-     image: memcached:1.6.23-alpine
-     container_name: zotero-memcached
-     restart: always
+    image: memcached:1.6.23-alpine
+    container_name: zotero-memcached
+    restart: always
 
   localstack:
     image: atlassianlabs/localstack
