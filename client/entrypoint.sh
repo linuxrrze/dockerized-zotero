@@ -24,7 +24,7 @@ npm install
 
 # build
 PARAMS=""
-if [ $DEBUGGER -eq 1 ]; then
+if [ "x$DEBUGGER" = "x1" ]; then
 	PARAMS="-t"
 fi
 
