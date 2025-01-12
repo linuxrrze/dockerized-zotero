@@ -1,12 +1,12 @@
 # Component: dataserver
 
-The dataserver provides the API for Zotero.
+The dataserver provides the API for Zotero (like https://api.zotero.org does).
 
 ## Zotero Server 
 
 ### More information
 
-[github zotero/dataserver](https://github.com/zotero/dataserver)
+Source: [https://github.com/zotero/dataserver](https://github.com/zotero/dataserver)
 
 ### Usefull commands
 
