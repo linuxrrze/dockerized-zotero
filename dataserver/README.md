@@ -1,4 +1,4 @@
-# Dockerized-Zotero / dataserver
+# Component: dataserver
 
 The dataserver provides the API for Zotero.
 
@@ -10,7 +10,7 @@ The dataserver provides the API for Zotero.
 
 ### Usefull commands
 
-*List users items*:
+*List user's items*:
 ```bash
 $ curl -H "Zotero-API-Key: ${APIKEY}" https://zotero-api.linux-ng.de/users/${USERID}/items
 ```
