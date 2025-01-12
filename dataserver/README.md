@@ -12,7 +12,7 @@ The dataserver provides the API for Zotero.
 
 *List user's items*:
 ```bash
-$ curl -H "Zotero-API-Key: ${APIKEY}" https://zotero-api.linux-ng.de/users/${USERID}/items
+$ curl -H "Zotero-API-Key: ${APIKEY}" http://localhost:8080/users/${USERID}/items
 ```
 
 In order to get an API key (${APIKEY}) and the user's id (${USERID}) use list-users.sh/list-keys.sh, like:
