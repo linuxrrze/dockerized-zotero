@@ -97,32 +97,32 @@ $ ./staging/Zotero_VERSION/zotero(.exe)
 
 *Create new users*:
 ```bash
-$ sudo docker exec zotero-dataserver /create-user.sh [USER_NAME] [EMAIL] [PASSWORD] 
+$ sudo docker exec zotero-dataserver /scripts/create-user.sh [USER_NAME] [EMAIL] [PASSWORD] 
 ```
 
 *List users*:
 ```bash
-$ sudo docker exec zotero-dataserver /list-users.sh
+$ sudo docker exec zotero-dataserver /scripts/list-users.sh
 ```
 
 *Create shared group libraries*:
 ```bash
-$ sudo docker exec zotero-dataserver /create-group.sh [OWNER_USER_NAME] [GROUP_NAME] "[GROUP_FULLNAME]" 
+$ sudo docker exec zotero-dataserver /scripts/create-group.sh [OWNER_USER_NAME] [GROUP_NAME] "[GROUP_FULLNAME]" 
 ```
 
 *List groups*:
 ```bash
-$ sudo docker exec zotero-dataserver /list-groups.sh
+$ sudo docker exec zotero-dataserver /scripts/list-groups.sh
 ```
 
 *Add users to a group*:
 ```bash
-$ sudo docker exec zotero-dataserver /add-user-group.sh [USER_NAME] [GROUP_NAME]
+$ sudo docker exec zotero-dataserver /scripts/add-user-group.sh [USER_NAME] [GROUP_NAME]
 ```
 
 *Remove users from a group*:
 ```bash
-$ sudo docker exec zotero-dataserver /remove-user-group.sh [USER_NAME] [GROUP_NAME]
+$ sudo docker exec zotero-dataserver /scripts/remove-user-group.sh [USER_NAME] [GROUP_NAME]
 ```
 
 You can add, edit and delete users and groups with PhpMyAdmin accessing to http://localhost:3000.
