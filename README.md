@@ -46,14 +46,14 @@ The source code is downloaded when the docker image is created. To upgrade and d
 
 *Available endpoints*:
 
-| Name          | URL                    | Login    | Password      |
-| ------------- | ---------------------- |--------- | ------------- |
-| Zotero API    | http://localhost:8080  | admin    |  admin        |
-| Stream Server | http://localhost:8081  | -        |  -            |
-| S3 API        | http://localhost:9000  | -        |  -            |
-| PHPMyAdmin    | http://localhost:3000  | root     |  zotero       |
-| S3 Web UI     | http://localhost:4000  | zotero   |  zoterodocker |
-| Web Library   | http://localhost:8001  | -        |  -            |
+| Name          | URL                    | Login    | Password      | Base repo                                                              |
+| ------------- | ---------------------- |--------- | ------------- | ---------------------------------------------------------------------  |
+| Zotero API    | http://localhost:8080  | admin    |  admin        | [github zotero/dataserver](https://github.com/zotero/dataserver)       |
+| Stream Server | http://localhost:8081  | -        |  -            | [github zotero/stream-server](https://github.com/zotero/stream-server) |
+| Web Library   | http://localhost:8001  | -        |  -            | [github zotero/web-library](https://github.com/zotero/web-library)     |
+| PHPMyAdmin    | http://localhost:3000  | root     |  zotero       | PHPMyAdmin docker image                                                |
+| S3 API        | http://localhost:9000  | -        |  -            | Minio docker image                                                     |
+| S3 Web UI     | http://localhost:4000  | zotero   |  zoterodocker | Minio docker image                                                     |
 
 *Data location*:
 
