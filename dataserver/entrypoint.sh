@@ -41,6 +41,11 @@ aws --endpoint-url "$AWS_S3_ENDPOINT_URL" s3 mb s3://zotero
 aws --endpoint-url "$AWS_S3_ENDPOINT_URL" s3 mb s3://zotero-fulltext
 aws --endpoint-url "$AWS_LOCALSTACK_ENDPOINT_URL" sns create-topic --name zotero
 
+SCHEMA=./htdocs/zotero-schema/schema.json
+if [ ! -f ${SCHEMA}.gz -o ${SCHEMA} -nt ${SCHEMA}.gz ]; then
+  cat ${SCHEMA} | gzip -c > ${SCHEMA}.gz
+fi
+
 # Maybe disable rinetd forwarding?
 if [ "x$ENABLE_S3_FORWARDING" != "no" ]; then
 # Start rinetd
