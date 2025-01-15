@@ -13,7 +13,7 @@ apt-get -y install software-properties-common && \
 apt-get update && \
 apt-get -y install apache2 libapache2-mod-php8.3 composer mysql-client rinetd git\
  php8.3-dev php8.3-xml php8.3-mbstring php8.3-mysql php8.3-memcached php8.3-curl php8.3-redis php8.3-igbinary php8.3-memcached\
- libmemcached11 libmemcachedutil2 libmemcached-dev zlib1g-dev
+ libmemcached11 libmemcachedutil2 libmemcached-dev zlib1g-dev pwgen
 
 # Setup PHP
 RUN \
