@@ -15,3 +15,5 @@
     ```bash
     $ docker compose run windows
     ```
+
+- The resulting clients will be stored in the sub-directory "staging".
