@@ -57,7 +57,7 @@ fi
 /var/www/zotero/misc/init-mysql.sh
 
 if [ -n "$TESTUSER_NAME" ]; then
-/scripts/create-user.sh "$TESTUSER_NAME" "$TESTUSER_MAIL" "$TESTUSER_PW" && \
+/scripts/create-user.sh "$TESTUSER_NAME" "$TESTUSER_MAIL" "$TESTUSER_PASSWORD" && \
 /scripts/add-key.sh "$TESTUSER_NAME" "$TESTUSER_KEY"
 fi
 
