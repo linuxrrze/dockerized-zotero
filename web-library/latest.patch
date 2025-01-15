@@ -1,0 +1,318 @@
+diff --git a/scripts/server.cjs b/scripts/server.cjs
+index 84e9e6d5..8fb2832a 100644
+--- a/scripts/server.cjs
++++ b/scripts/server.cjs
+@@ -18,6 +18,10 @@ const handler = (req, resp) => {
+ 	const fallback = () => {
+ 		fs.readFile(path.join(__dirname, '..', 'build', htmlFile), (err, buf) => {
+ 			resp.setHeader('Content-Type', 'text/html');
++			resp.setHeader('Access-Control-Allow-Origin', '*');
++			resp.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
++			resp.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
++			resp.setHeader('Access-Control-Allow-Credentials', true);
+ 			resp.end(buf);
+ 		});
+ 	};
+@@ -50,4 +54,4 @@ if(useHTTPS) {
+ 	http.createServer(handler).listen(port, () => {
+ 		console.log(`>>> Listening on http://0.0.0.0:${port}/\n`);
+ 	});
+-}
+\ No newline at end of file
++}
+diff --git a/src/html/index.html b/src/html/index.html
+index bfffbd05..9d503668 100644
+--- a/src/html/index.html
++++ b/src/html/index.html
+@@ -16,139 +16,26 @@
+ 	<div id="zotero-web-library"></div>
+ 	<script type="application/json" id="zotero-web-library-config">
+ 		{
+-			"userSlug": "zotero-user",
+-			"userId": "475425",
+-			"libraries": {
+-				"include": [
+-					{
+-						"key": "g729",
+-						"name": "All Things Zotero",
+-						"isGroupLibrary": true
+-					}
+-				],
+-				"includeMyLibrary": true,
+-				"includeUserGroups": false
+-			}
++			"userSlug": "testuser",
++			"userId": "4",
++			"apiKey": "kaec1reitahLiecoo2eegohs"
+ 		}
+ 	</script>
+ 	<script type="application/json" id="zotero-web-library-menu-config">
+ 		{
+ 			"desktop": [
+ 				{
+-					"label": "My Library",
+-					"href": "/mylibrary",
++					"label": "Logout",
++					"class": "logout-button",
++					"href": "/logout.html",
+ 					"active": true
+-				},
+-				{
+-					"label": "Groups",
+-					"href": "/groups"
+-				},
+-				{
+-					"label": "Documentation",
+-					"href": "/support"
+-				},
+-				{
+-					"label": "Forums",
+-					"href": "https://forums.zotero.org"
+-				},
+-				{
+-					"label": "Get Involved",
+-					"href": "/getinvolved"
+-				},
+-				{
+-					"label": "Zotero User",
+-					"truncate": true,
+-					"dropdown": true,
+-					"entries": [
+-						{
+-							"label": "My Profile",
+-							"href": "/testuser1"
+-						},
+-						{
+-							"separator": true
+-						},
+-						{
+-							"label": "Inbox (13)",
+-							"href": "https://forums.zotero.org/messages/inbox"
+-						},
+-						{
+-							"separator": true
+-						},
+-						{
+-							"label": "Settings",
+-							"href": "/settings"
+-						},
+-						{
+-							"label": "Use Old Web Library",
+-							"href": "/testuser1/items?usenewlibrary=0"
+-						},
+-						{
+-							"label": "Logout",
+-							"href": "/user/logout"
+-						}
+-					]
+-				},
+-				{
+-					"label": "Upgrade Storage",
+-					"href": "/settings/storage?ref=usb",
+-					"className": "offscreen"
+-				},
+-				{
+-					"label": "Upgrade Storage",
+-					"href": "/settings/storage?ref=usb",
+-					"className": "btn btn-secondary hidden-md-down upgrade-storage",
+-					"position": "right",
+-					"aria-hidden": true
+ 				}
+ 			],
+ 			"mobile": [
+-				{
+-					"label": "My Library",
+-					"href": "/mylibrary",
+-					"active": true
+-				},
+-				{
+-					"label": "Groups",
+-					"href": "/groups"
+-				},
+-				{
+-					"label": "Documentation",
+-					"href": "/support"
+-				},
+-				{
+-					"label": "Forums",
+-					"href": "https://forums.zotero.org"
+-				},
+-				{
+-					"label": "Get Involved",
+-					"href": "/getinvolved"
+-				},
+-				{
+-					"label": "Test User",
+-					"href": "/testuser1",
+-					"className": "separated"
+-				},
+-				{
+-					"label": "Inbox (13)",
+-					"href": "https://forums.zotero.org/messages/inbox",
+-					"className": "separated"
+-				},
+-				{
+-					"label": "Settings",
+-					"href": "/settings"
+-				},
+-				{
+-					"label": "Use Old Web Library",
+-					"href": "/testuser1/items?usenewlibrary=0"
+-				},
+ 				{
+ 					"label": "Logout",
+-					"href": "/user/logout"
+-				},
+-				{
+-					"label": "Upgrade Storage",
+-					"href": "/settings/storage?ref=usb",
+-					"className": "separated"
++					"href": "/logout",
++					"active": true
+ 				}
+ 			]
+ 		}
+diff --git a/src/html/login.html b/src/html/login.html
+new file mode 100644
+index 00000000..48dfcf45
+--- /dev/null
++++ b/src/html/login.html
+@@ -0,0 +1,34 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Login</title>
++</head>
++<body>
++    <form id="loginForm">
++        <label for="userSlug">User Slug:</label>
++        <input type="text" id="userSlug" name="userSlug" required><br>
++        <label for="userId">User ID:</label>
++        <input type="text" id="userId" name="userId" required><br>
++        <label for="apiKey">API Key:</label>
++        <input type="text" id="apiKey" name="apiKey" required><br>
++        <button type="submit">Login</button>
++    </form>
++
++    <script>
++        document.getElementById('loginForm').addEventListener('submit', function(event) {
++            event.preventDefault();
++            const userSlug = document.getElementById('userSlug').value;
++            const userId = document.getElementById('userId').value;
++            const apiKey = document.getElementById('apiKey').value;
++
++            localStorage.setItem('userSlug', userSlug);
++            localStorage.setItem('userId', userId);
++            localStorage.setItem('apiKey', apiKey);
++
++            window.location.href = 'index.html';
++        });
++    </script>
++</body>
++</html>
++
+diff --git a/src/html/logout.html b/src/html/logout.html
+new file mode 100644
+index 00000000..c13e2002
+--- /dev/null
++++ b/src/html/logout.html
+@@ -0,0 +1,58 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="utf-8">
++    <title>Zotero Web Library Demo</title>
++    <meta name="viewport" content="width=device-width, initial-scale=1">
++    <link rel="stylesheet" href="/static/zotero-web-library.css">
++    <meta name="apple-mobile-web-app-capable" content="yes">
++    <meta name="mobile-web-app-capable" content="yes">
++    <meta name="apple-mobile-web-app-status-bar-style" content="default">
++    <link rel="manifest" href="/manifest.json">
++    <link rel="apple-touch-icon" sizes="192x192" href="/static/icons/icon-192x192.png">
++    <link rel="apple-touch-icon" sizes="512x512" href="/static/icons/icon-512x512.png">
++</head>
++<body>
++   <p>"Remove API key"</p>
++   <script>               
++        const cookieArray = document.cookie.split('; ');
++	const config = {};
++	cookieArray.forEach(cookie => {
++        		const [key, value] = cookie.split('=');
++        		config[key] = value;
++   		});
++        
++        const apiKey = config['apiKey'];
++        console.log(apiKey); 
++        fetch('https://192.168.62.111/http://192.168.62.111:8080/keys/current', {
++                    method: 'DELETE',
++                    headers: {
++                        'Zotero-API-Key': apiKey
++                    }
++                })
++                
++                .then(response => {
++                    // Обновляем страницу
++                    deleteAllCookies() 
++                    window.location.href = 'http://192.168.62.111:3000';
++
++                })
++                .catch(error => console.error('Error:', error));
++                
++        function deleteAllCookies() {
++    	var cookies = document.cookie.split(";");
++
++    	for (var i = 0; i < cookies.length; i++) {
++		var cookie = cookies[i];
++		var eqPos = cookie.indexOf("=");
++		var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
++		document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
++    	}
++}
++    
++        
++   
++</script>
++</body>
++</html>
++
+diff --git a/src/js/constants/defaults.js b/src/js/constants/defaults.js
+index 8839db78..ec17a564 100644
+--- a/src/js/constants/defaults.js
++++ b/src/js/constants/defaults.js
+@@ -4,15 +4,15 @@ import { coreCitationStyles } from '../../../data/citation-styles-data.json';
+ 
+ export const apiKey = '';
+ export const apiConfig = {
+-	apiAuthorityPart: 'api.zotero.org',
++	apiAuthorityPart: 'zotero-api.linux-ng.de',
+ 	retry: 2,
+ };
+ 
+-export const websiteUrl = 'https://www.zotero.org/';
++export const websiteUrl = 'https://zotero-api.linux-ng.de/';
+ export const forumsUrl = 'https://forums.zotero.org/';
+ export const buyStorageUrl = websiteUrl + 'storage?ref=usb';
+ export const stylesSourceUrl = 'https://www.zotero.org/styles-files/styles.json';
+-export const streamingApiUrl = 'wss://stream.zotero.org/';
++export const streamingApiUrl = 'wss://zotero-stream.linux-ng.de/';
+ export const translateUrl = 'location' in window ? window.location.origin : '';
+ export const pdfReaderURL = '/static/pdf-reader/reader.html';
+ export const pdfReaderCMapsURL = '/static/pdf-reader/pdf/web/cmaps/';
+diff --git a/src/js/utils.js b/src/js/utils.js
+index e3491d85..752da387 100644
+--- a/src/js/utils.js
++++ b/src/js/utils.js
+@@ -82,10 +82,10 @@ const deduplicateByHash = (array, hasher) => {
+ };
+ 
+ const getItemCanonicalUrl = ({ libraryKey, itemKey }) =>
+-	`http://zotero.org/${libraryKey.startsWith('u') ? 'user' : 'groups'}/${libraryKey.slice(1)}/items/${itemKey}`;
++	`https://zotero-api.linux-ng.de/${libraryKey.startsWith('u') ? 'user' : 'groups'}/${libraryKey.slice(1)}/items/${itemKey}`;
+ 
+ const getItemFromCanonicalUrl = url => {
+-	const match = url.match('https?://zotero.org/(users|groups)/([0-9]+)/items/([A-Z0-9]{8})');
++	const match = url.match('https?://zotero-api.linux-ng.de/(users|groups)/([0-9]+)/items/([A-Z0-9]{8})');
+ 	if(match) {
+ 		const [, libraryType, libraryID, itemKey] = match;
+ 		const libraryKey = `${libraryType === 'users' ? 'u' : 'g'}${libraryID}`;

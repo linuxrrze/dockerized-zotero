@@ -8,6 +8,8 @@ RUN apt update && apt -y upgrade && apt -y install git rsync
 #RUN git clone --recursive "https://github.com/zotero/web-library.git" /web-library && cd /web-library && git checkout tags/v1.5.7
 RUN git clone --recursive "https://github.com/zotero/web-library.git" /web-library
 WORKDIR /web-library
+COPY latest.patch /tmp
+RUN patch -p1 < /tmp/latest.patch
 RUN npm ci && npm cache clean --force
 RUN npm run build
 
