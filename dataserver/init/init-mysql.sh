@@ -2,6 +2,12 @@
 MYSQL='mysql -h mysql -P 3306 -u root'
 SCRIPTS_DIR='/var/www/zotero/misc'
 
+echo "Waiting for mysql to come up..."
+while ! mysqladmin ping -h"$DB_HOST" --silent; do
+    sleep 1
+done
+echo "Mysql ready ... continuing"
+
 if [ $(echo "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'zotero_master'" | $MYSQL -s -N) -eq 0 ]; then
 echo "DROP DATABASE IF EXISTS zotero_master" | $MYSQL
 echo "CREATE DATABASE zotero_master" | $MYSQL
