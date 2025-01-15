@@ -3,11 +3,22 @@
 MYSQL="mysql -h mysql -P 3306 -u root"
 
 if [ "x$1" == "x" ]; then
-        echo "Syntax: ${0##*/} username"
+        echo "Syntax: ${0##*/} username [24-char key]"
         exit 1
 fi
 
-KEY=$(pwgen 24 1)
+if [ "x$2" == "x" ]; then
+	echo "No key specified, generating one:"
+	KEY=$(pwgen 24 1)
+	echo "Key is: $KEY"
+elif [ ${#2} -eq 24 ]; then
+	KEY="$2"
+else
+	echo "Wrong key format - aborting"
+	echo "Expected 24-char key"
+	exit 1
+fi
+
 if [ "x$KEY" == "x" ]; then
 	echo "Key generation failed - maybe pwgen missing?"
 	exit 1
