@@ -1,0 +1,13 @@
+# Dockerized-Zotero
+
+## Zotero web-library 
+
+### Building
+
+- You can build the Linux client like this:
+
+    ```bash
+    $  docker run -v ./patches:/patches -v ./build:/build zotero-web-library
+    ```
+
+- The build result will be available in "build" and can be server by a standard web server.
