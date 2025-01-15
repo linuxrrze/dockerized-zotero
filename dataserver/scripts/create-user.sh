@@ -9,7 +9,6 @@ if [ $# -ne 3 ]; then
 	echo "Syntax: ${0##*/} username email password"
 	exit 1
 fi
-exit 0
 
 if [ $($MYSQL -s -N zotero_www -e "SELECT count(*) FROM users WHERE username='${1}'") != 0 ]; then
         echo "The username ${1} is already used. Try another one."
