@@ -56,5 +56,10 @@ fi
 # Upgrade database
 /var/www/zotero/misc/init-mysql.sh
 
+if [ -n "$TESTUSER_NAME" ]; then
+/scripts/create-user.sh "$TESTUSER_NAME" "$TESTUSER_PW" && \
+/scripts/add-key.sh "$TESTUSER_NAME" "$TESTUSER_KEY"
+fi
+
 # Start Apache2
 exec apache2 -DNO_DETACH -k start
