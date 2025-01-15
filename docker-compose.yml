@@ -134,6 +134,17 @@ services:
       - tinymce-clean-server
     restart: always
 
+  translation-server:
+    image: zotero-translation-server
+    container_name: zotero-translation-server
+    build:
+      context: ./translation-server
+      dockerfile: Dockerfile
+    hostname: localhost.localdomain
+    ports:
+      - ${TRANSLATION_SERVER_PORT}:1969
+    restart: always
+
   web-library:
     image: zotero-web-library
     container_name: zotero-web-library
