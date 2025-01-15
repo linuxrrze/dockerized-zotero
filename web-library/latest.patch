@@ -42,7 +42,7 @@ index bfffbd05..9d503668 100644
 -				"includeUserGroups": false
 -			}
 +			"userSlug": "testuser",
-+			"userId": "4",
++			"userId": "2",
 +			"apiKey": "kaec1reitahLiecoo2eegohs"
  		}
  	</script>
