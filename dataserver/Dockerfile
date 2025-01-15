@@ -57,6 +57,7 @@ RUN composer install
 
 # copy files
 COPY ./init/www.sql /var/www/zotero/misc/www.sql
+COPY ./init/init-mysql.sh /var/www/zotero/misc/init-mysql.sh
 
 # Set the entrypoint file
 COPY ./entrypoint.sh /

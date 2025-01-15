@@ -54,7 +54,7 @@ echo "0.0.0.0		$S3_SERVER_PORT		minio		$S3_SERVER_PORT" > /etc/rinetd.conf
 fi
 
 # Upgrade database
-/scripts/init-mysql.sh
+/var/www/zotero/misc/init-mysql.sh
 
 # Start Apache2
 exec apache2 -DNO_DETACH -k start
