@@ -1,9 +1,11 @@
 #!/bin/sh
-MYSQL='mysql -h mysql -P 3306 -u root'
+
+MYSQL_HOST=mysql
+MYSQL="mysql -h ${MYSQL_HOST} -P 3306 -u root"
 SCRIPTS_DIR='/var/www/zotero/misc'
 
 echo "Waiting for mysql to come up..."
-while ! mysqladmin ping -h"$DB_HOST" --silent; do
+while ! mysqladmin ping -h"${MYSQL_HOST}" --silent; do
     sleep 1
 done
 echo "Mysql ready ... continuing"
