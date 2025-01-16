@@ -1,5 +1,5 @@
 # s. .nvmrc: iron/lts = 20
-FROM node:iron-bullseye
+FROM node:lts
 
 # install packages
 RUN apt update && apt -y upgrade && apt -y install git rsync

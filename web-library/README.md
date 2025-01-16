@@ -7,6 +7,7 @@
 - You can build the Linux client like this:
 
     ```bash
+    $  docker build -t zotero-web-library .
     $  docker run -v ./patches:/patches -v ./build:/build zotero-web-library
     ```
 
