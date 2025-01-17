@@ -8,7 +8,7 @@
 
     ```bash
     $  docker build -t zotero-web-library .
-    $  docker run -v ./patches:/patches -v ./build:/build zotero-web-library
+    $  docker run -v ./patches:/patches -v ${PWD}/../webroot:/build zotero-web-library
     ```
 
 - The build result will be available in "build" and can be server by a standard web server.

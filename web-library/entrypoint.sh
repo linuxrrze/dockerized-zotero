@@ -2,6 +2,7 @@
 
 ROOT_DIR="/zotero-web-library"
 
+test -d $ROOT_DIR || mkdir -p $ROOT_DIR
 cd $ROOT_DIR
 
 # Configure
