@@ -16,7 +16,9 @@ npm run build
 
 test -d /build/demo || mkdir -p /build/demo
 test -d /build/build || mkdir -p /build/build
+test -d /build/assets || mkdir -p /build/assets
 
 cp -r -f "${ROOT_DIR}"/demo/* /build/demo
 cp -r -f "${ROOT_DIR}"/build/* /build/build
+cp -r -f "${ROOT_DIR}"/assets/* /build/assets
 

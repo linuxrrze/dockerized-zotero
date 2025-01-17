@@ -8,7 +8,7 @@
 
     ```bash
     $  docker build -t zotero-web-components .
-    $  docker run -v ./build:/build -ti zotero-web-components
+    $  docker run -v ${PWD}/../webroot:/build -ti zotero-web-components
     ```
 
 - The build result will be available in "build" and can be server by a standard web server.
