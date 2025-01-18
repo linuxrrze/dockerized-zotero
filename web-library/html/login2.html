@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login with username/password</title>
+</head>
+<body>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" autocomplete="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+ 	    const data = {
+		username: username,
+		password: password,
+		name: 'Temporary Zotero Web Client Key',
+		access: {
+			user: {
+				library: true,
+				notes:true,
+				write:true,
+				files:true
+				},
+			groups: {
+				all: {
+					library:true,
+					write:true}
+			}
+		}
+	    }
+	    console.log('body:', JSON.stringify(data))
+	    fetch('https://zotero-api.linux-ng.de/keys', {
+                    method: 'POST',
+                    headers: {
+			'Content-Type': 'application/json',
+                        'Zotero-API-Version': 3,
+			'Zotero-Schema-Version': 32
+                    },
+		    body:JSON.stringify(data)
+                })
+            .then(response => response.json())
+  	    .then(data => {
+		    console.log('Success:', data);
+		    localStorage.setItem('zoteroUserInfoJ', JSON.stringify({
+			    username: data.username,
+			    userSlug: data.username,
+			    userId: data.userID,
+			    realname: '',
+			    apiKey: data.key
+	    	    }));
+            	    window.location.href = 'web-library.html';
+	    } )
+            .catch(error => console.error('Error:', error));
+
+        });
+    </script>
+</body>
+</html>
+

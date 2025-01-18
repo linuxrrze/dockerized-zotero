@@ -15,16 +15,13 @@
 <body>
    <p>"Remove API key"</p>
    <script>               
-        const cookieArray = document.cookie.split('; ');
-	const config = {};
-	cookieArray.forEach(cookie => {
-        		const [key, value] = cookie.split('=');
-        		config[key] = value;
-   		});
-        
-        const apiKey = config['apiKey'];
+	zoterouserinfo = localStorage.getItem('zoteroUserInfoJ');
+	console.log(zoterouserinfo);
+	jzui = JSON.parse(zoterouserinfo)
+	console.log(jzui)
+        const apiKey = jzui['apiKey'];
         console.log(apiKey); 
-        fetch('https://192.168.62.111:8080/keys/current', {
+        fetch('https://zotero-api.linux-ng.de/keys/current', {
                     method: 'DELETE',
                     headers: {
                         'Zotero-API-Key': apiKey
@@ -33,7 +30,7 @@
                 
                 .then(response => {
                     deleteAllCookies() 
-                    window.location.href = 'http://192.168.62.111:3000';
+                    window.location.href = 'http://zotero.linux-ng.de/login2.html';
 
                 })
                 .catch(error => console.error('Error:', error));
