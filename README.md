@@ -1,6 +1,6 @@
 # Dockerized-Zotero
 
-This repository allows you to run the Zotero data server locally using docker containers, and easily build the Zotero client application. It is inspired by [ZotPrime](https://github.com/FiligranHQ/zotprime).
+This repository allows you to run the Zotero data server locally using docker containers, and easily build the Zotero client application.
 
 Before use, make sure you have Docker installed. For instructions on how to install Docker Desktop, see: [Install Docker Engine](https://docs.docker.com/engine/install).
 
@@ -126,3 +126,9 @@ $ sudo docker exec zotero-dataserver /scripts/remove-user-group.sh [USER_NAME] [
 ```
 
 You can add, edit and delete users and groups with PhpMyAdmin accessing to http://localhost:3000.
+
+## Credits
+1. https://github.com/FiligranHQ/zotprime
+2. https://github.com/foxsen/zotero-selfhost
+3. https://github.com/victoradrianjimenez/dockerized-zotero
+4. https://github.com/uniuuu/zotprime
