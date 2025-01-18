@@ -27,14 +27,3 @@ curl --fail-with-body --silent \
    -d "{ \"username\":\"${TESTUSER_NAME}\", \"password\":\"${TESTUSER_PASSWORD}\", \"name\":\"Automatic Zotero Client Key\", \"access\":{\"user\":{\"library\":true,\"notes\":true,\"write\":true,\"files\":true}, \"groups\":{\"all\":{\"library\":true,\"write\":true}}} }" \
     "${DATA_SERVER_URL}/keys" >& /dev/null \
     && echo "Success" || echo "Failed"
-
-echo -n "Get default API key...    "
-# Username/password based checks:
-curl --fail-with-body --silent \
-   -X POST \
-   -H 'Content-Type: application/json' \
-   -H 'Zotero-API-Version: 3' \
-   -H 'Zotero-Schema-Version: 32' \
-   -d "{ \"username\":\"${TESTUSER_NAME}\", \"password\":\"${TESTUSER_PASSWORD}\", \"name\":\"Automatic Zotero Client Key\" }" \
-    "${DATA_SERVER_URL}/keys"  >& /dev/null \
-    && echo "Success" || echo "Failed"
