@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Zotero Web Library Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/zotero-web-library.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/static/icons/icon-512x512.png">
+</head>
+<body>
+   <p>"Remove API key"</p>
+   <script>               
+        const cookieArray = document.cookie.split('; ');
+	const config = {};
+	cookieArray.forEach(cookie => {
+        		const [key, value] = cookie.split('=');
+        		config[key] = value;
+   		});
+        
+        const apiKey = config['apiKey'];
+        console.log(apiKey); 
+        fetch('https://192.168.62.111:8080/keys/current', {
+                    method: 'DELETE',
+                    headers: {
+                        'Zotero-API-Key': apiKey
+                    }
+                })
+                
+                .then(response => {
+                    deleteAllCookies() 
+                    window.location.href = 'http://192.168.62.111:3000';
+
+                })
+                .catch(error => console.error('Error:', error));
+                
+        function deleteAllCookies() {
+    	var cookies = document.cookie.split(";");
+
+    	for (var i = 0; i < cookies.length; i++) {
+		var cookie = cookies[i];
+		var eqPos = cookie.indexOf("=");
+		var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+		document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    	}
+}
+    
+        
+   
+</script>
+</body>
+</html>
+

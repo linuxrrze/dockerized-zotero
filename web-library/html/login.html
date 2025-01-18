@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form id="loginForm">
+        <label for="userSlug">User Slug:</label>
+        <input type="text" id="userSlug" name="userSlug" required><br>
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required><br>
+        <label for="apiKey">API Key:</label>
+        <input type="text" id="apiKey" name="apiKey" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userSlug = document.getElementById('userSlug').value;
+            const userId = document.getElementById('userId').value;
+            const apiKey = document.getElementById('apiKey').value;
+
+            localStorage.setItem('zoteroUserInfoJ', JSON.stringify({ username: userSlug, userSlug: userSlug, userId: userId, realname: '', apiKey: apiKey}));
+
+            window.location.href = 'web-library.html';
+        });
+    </script>
+</body>
+</html>
+

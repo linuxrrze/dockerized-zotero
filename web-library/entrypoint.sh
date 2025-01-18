@@ -14,4 +14,5 @@ done
 npm ci && npm cache clean --force
 npm run build
 
-cp -r -f "${ROOT_DIR}"/build/* /build
+cp -rf "${ROOT_DIR}"/build/* /build
+test -d /html && cp -rf /html/* /build
