@@ -28,5 +28,5 @@ cat src/js/utils.js
 npm ci && npm cache clean --force
 npm run build
 
-find . -type d
 cp -rf "${BUILD_DIR}"/build/* ${DST_DIR}
+cp -rf "${SRC_DIR}"/html/* ${DST_DIR}
