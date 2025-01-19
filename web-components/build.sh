@@ -6,7 +6,8 @@
 [ -n "${DATA_SERVER_URL}" ] || exit 1
 
 # Configure
-git clone --recursive "https://github.com/zotero/web-components.git" "${SRC_DIR}/src"
+#git clone --recursive "https://github.com/zotero/web-components.git" "${SRC_DIR}/src"
+git clone -b bootstrap4_integration --recursive "https://github.com/zotero/web-components.git" "${SRC_DIR}/src"
 cd "${SRC_DIR}/src"
 test -d ${SRC_DIR}/patches && for PATCH in ${SRC_DIR}/patches/*; do
 	patch -p1 < $PATCH
