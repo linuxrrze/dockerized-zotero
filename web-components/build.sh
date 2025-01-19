@@ -16,10 +16,10 @@ done
 npx --yes update-browserslist-db@latest
 npm run build
 
-test -d ${DST_DIR}/demo || mkdir -p ${DST_DIR}/demo
 test -d ${DST_DIR}/build || mkdir -p ${DST_DIR}/build
 test -d ${DST_DIR}/assets || mkdir -p ${DST_DIR}/assets
 
-cp -r -f "${BUILD_DIR}"/demo/* ${DST_DIR}/demo
-cp -r -f "${BUILD_DIR}"//build/* ${DST_DIR}/build
-cp -r -f "${BUILD_DIR}"/assets/* ${DST_DIR}/assets
+cp -r "${BUILD_DIR}"/demo/* ${DST_DIR}/
+cat "${BUILD_DIR}"/demo/index.html | sed -e s+/demo/+/+ > ${DST_DIR}/index-demo.html
+cp -rf "${BUILD_DIR}"/build/* ${DST_DIR}/build/
+cp -rf "${BUILD_DIR}"/assets/* ${DST_DIR}/assets/
