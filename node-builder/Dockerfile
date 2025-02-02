@@ -1,7 +1,10 @@
-FROM node:lts
+FROM ubuntu:latest
+
+# Prepare nodejs installation
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 
 # install packages
-RUN apt update && apt -y upgrade && apt -y install git rsync
+RUN apt update && apt -y upgrade && apt -y install git rsync nodejs
 
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
