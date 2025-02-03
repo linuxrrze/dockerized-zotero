@@ -1,10 +1,9 @@
-#FROM node:lts-alpine
 FROM node:lts
 
 RUN \
 apt update && \
 apt -y upgrade && \
-apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip binutils xz-utils file ncurses-bin 7zip
+apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip-full binutils xz-utils file ncurses-bin
 
 # Install AWS client
 RUN \
