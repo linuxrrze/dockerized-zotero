@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -x
+set -e
+
 # Configure
 BUILD_DIR="/tmp/zotero"
 ZOTERO_CONFIG_FILE="$BUILD_DIR/resource/config.js"
