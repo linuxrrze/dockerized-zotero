@@ -36,9 +36,10 @@ sed -i s+'^ssh '+'#ssh '+ app/scripts/check_requirements
 sed -i s+'^aws '+'#aws '+ app/scripts/check_requirements
 sed -i s+'^DEPLOY_CMD="ssh'+'DEPLOY_CMD="echo ssh'+ app/config.sh
 
+test -d /staging/build || mkdir /staging/build
 "$BUILD_DIR/app/scripts/fetch_mar_tools"
-"$BUILD_DIR/app/scripts/prepare_build" -s "$BUILD_DIR" -o /staging/build -c release -m $(./get_repo_branch_hash main)
-"$BUILD_DIR/app/scripts/build_and_deploy" -s /staging/build -p $PLATFORM -c release
+"$BUILD_DIR/app/scripts/prepare_build" -s "$BUILD_DIR" -o /staging/build -c release -m $("$BUILD_DIR/app/scripts/get_repo_branch_hash" main)
+"$BUILD_DIR/app/scripts/build_and_deploy" -d /staging/build -p $PLATFORM -c release
 #"$BUILD_DIR/app/scripts/7.0_release_build_and_deploy"
 #"$BUILD_DIR/app/scripts/dir_build" -q $PARAMS -p $PLATFORM
 
@@ -48,3 +49,4 @@ if [ "`uname`" = "Darwin" ]; then
 fi
 
 cp -r -f $BUILD_DIR/app/staging/* /staging
+cp -r -f $BUILD_DIR/app/dist/* /dist
