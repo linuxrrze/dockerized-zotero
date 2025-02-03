@@ -1,9 +1,13 @@
 #!/bin/bash
 
-ROOT_DIR="/zotero"
-ZOTERO_CONFIG_FILE="$ROOT_DIR/resource/config.js"
+# Configure
+BUILD_DIR="/zotero"
+ZOTERO_CONFIG_FILE="$BUILD_DIR/resource/config.js"
+# Use GIT_BUILD_TAG if set
+GIT_OPTIONS=${GIT_BUILD_TAG:+--branch $GIT_BUILD_TAG}
+git clone ${GIT_OPTIONS} --recursive https://github.com/zotero/zotero "${BUILD_DIR}"
 
-cd $ROOT_DIR
+cd $BUILD_DIR
 
 # Configure
 sed -i "s#https://api.zotero.org/#$DATA_SERVER_ADDRESS/#g" $ZOTERO_CONFIG_FILE
@@ -23,11 +27,11 @@ fi
 # run build watch # TEMP: --openssl-legacy-provider avoids a build error in pdf.js
 NODE_OPTIONS=--openssl-legacy-provider npm run build
 
-"$ROOT_DIR/app/scripts/dir_build" -q $PARAMS -p $PLATFORM
+"$BUILD_DIR/app/scripts/dir_build" -q $PARAMS -p $PLATFORM
 
 if [ "`uname`" = "Darwin" ]; then
 	# Sign the Word dylib so it works on Apple Silicon
-	"$ROOT_DIR/app/scripts/codesign_local" "$ROOT_DIR/app/staging/Zotero.app"
+	"$BUILD_DIR/app/scripts/codesign_local" "$BUILD_DIR/app/staging/Zotero.app"
 fi
 
-cp -r -f $ROOT_DIR/app/staging/* /staging
+cp -r -f $BUILD_DIR/app/staging/* /staging
