@@ -162,6 +162,7 @@ services:
       - DATA_SERVER_URL=${DATA_SERVER_URL}
       - STREAM_SERVER_ADDRESS=${STREAM_SERVER_ADDRESS}
       - API_AUTHORITY_PART=${API_AUTHORITY_PART}
+      - GIT_BUILD_TAG=v1.5.7
     volumes:
      - ./web-library:/buildsource
      - ./webroot:/builddest
