@@ -39,7 +39,8 @@ sed -i s+'^ssh '+'#ssh '+ app/scripts/check_requirements
 sed -i s+'^aws '+'#aws '+ app/scripts/check_requirements
 sed -i s+'^DEPLOY_CMD="ssh'+'DEPLOY_CMD="echo ssh'+ app/config.sh
 
-test -d /staging/build || mkdir /staging/build
+rm -rf /staging/build
+mkdir /staging/build
 "$BUILD_DIR/app/scripts/fetch_mar_tools"
 "$BUILD_DIR/app/scripts/prepare_build" -s "$BUILD_DIR" -o /staging/build -c release -m "${BRANCH_HASH}"
 "$BUILD_DIR/app/scripts/build_and_deploy" -d /staging/build -p $PLATFORM -c release
