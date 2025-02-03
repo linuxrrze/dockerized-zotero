@@ -4,7 +4,7 @@ FROM node:lts
 RUN \
 apt update && \
 apt -y upgrade && \
-apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip binutils xz-utils file ncurses-bin 
+apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip binutils xz-utils file ncurses-bin 7zip
 
 # Install AWS client
 RUN \
