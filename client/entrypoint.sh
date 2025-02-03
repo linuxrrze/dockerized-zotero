@@ -4,7 +4,7 @@
 BUILD_DIR="/zotero"
 ZOTERO_CONFIG_FILE="$BUILD_DIR/resource/config.js"
 # Use GIT_BUILD_TAG if set
-GIT_OPTIONS=${GIT_BUILD_TAG:+--branch $GIT_BUILD_TAG}
+GIT_OPTIONS=${ZOTERO_CLIENT_GIT_BUILD_TAG:+--branch $ZOTERO_CLIENT_GIT_BUILD_TAG}
 git clone ${GIT_OPTIONS} --recursive https://github.com/zotero/zotero "${BUILD_DIR}"
 
 cd $BUILD_DIR
