@@ -10,6 +10,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./staging/:/staging:rw
+      - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
       - PLATFORM=l
@@ -23,6 +24,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./staging/:/staging:rw
+      - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
       - PLATFORM=w
@@ -36,6 +38,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./staging/:/staging:rw
+      - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
       - PLATFORM=m
