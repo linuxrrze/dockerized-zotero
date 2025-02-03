@@ -14,7 +14,7 @@ npm -v
 # Configure
 BUILD_DIR=/tmp/build
 # Use GIT_BUILD_TAG if set
-GIT_OPTIONS=${GIT_BUILD_TAG:+--branch $GIT_BUILD_TAG}
+GIT_OPTIONS=${ZOTERO_WEB_LIBRARY_GIT_BUILD_TAG:+--branch $ZOTERO_WEB_LIBRARY_GIT_BUILD_TAG}
 rm -rf "${BUILD_DIR}"
 git clone ${GIT_OPTIONS} --recursive "https://github.com/zotero/web-library.git" "${BUILD_DIR}"
 cd "${BUILD_DIR}"

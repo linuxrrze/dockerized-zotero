@@ -157,12 +157,7 @@ services:
     container_name: zotero-web-library-builder
     hostname: localhost.localdomain
     restart: no
-    environment:
-      - WEB_SERVER_URL=${WEB_SERVER_URL}
-      - DATA_SERVER_URL=${DATA_SERVER_URL}
-      - STREAM_SERVER_ADDRESS=${STREAM_SERVER_ADDRESS}
-      - API_AUTHORITY_PART=${API_AUTHORITY_PART}
-      - GIT_BUILD_TAG=v1.5.7
+    env_file: ./.env
     volumes:
      - ./web-library:/buildsource
      - ./webroot:/builddest
@@ -172,11 +167,7 @@ services:
     container_name: zotero-web-components-builder
     hostname: localhost.localdomain
     restart: no
-    environment:
-      - WEB_SERVER_URL=${WEB_SERVER_URL}
-      - DATA_SERVER_URL=${DATA_SERVER_URL}
-      - STREAM_SERVER_ADDRESS=${STREAM_SERVER_ADDRESS}
-      - API_AUTHORITY_PART=${API_AUTHORITY_PART}
+    env_file: ./.env
     volumes:
      - ./web-components:/buildsource
      - ./webroot:/builddest
