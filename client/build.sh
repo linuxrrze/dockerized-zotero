@@ -7,10 +7,13 @@ set -e
 BUILD_DIR="/tmp/zotero"
 ZOTERO_CONFIG_FILE="$BUILD_DIR/resource/config.js"
 # Use GIT_BUILD_TAG if set
+GIT_BRANCH=${ZOTERO_CLIENT_GIT_BUILD_TAG:-main}
 GIT_OPTIONS=${ZOTERO_CLIENT_GIT_BUILD_TAG:+--branch $ZOTERO_CLIENT_GIT_BUILD_TAG}
 git clone ${GIT_OPTIONS} --recursive https://github.com/zotero/zotero "${BUILD_DIR}"
 
-cd $BUILD_DIR
+cd "$BUILD_DIR"
+BRANCH_HASH=$(git log -n 1 --pretty=format:"%H")
+
 
 # Configure
 sed -i "s#https://api.zotero.org/#$DATA_SERVER_ADDRESS/#g" $ZOTERO_CONFIG_FILE
@@ -38,7 +41,7 @@ sed -i s+'^DEPLOY_CMD="ssh'+'DEPLOY_CMD="echo ssh'+ app/config.sh
 
 test -d /staging/build || mkdir /staging/build
 "$BUILD_DIR/app/scripts/fetch_mar_tools"
-"$BUILD_DIR/app/scripts/prepare_build" -s "$BUILD_DIR" -o /staging/build -c release -m $("$BUILD_DIR/app/scripts/get_repo_branch_hash" main)
+"$BUILD_DIR/app/scripts/prepare_build" -s "$BUILD_DIR" -o /staging/build -c release -m "${BRANCH_HASH}"
 "$BUILD_DIR/app/scripts/build_and_deploy" -d /staging/build -p $PLATFORM -c release
 #"$BUILD_DIR/app/scripts/7.0_release_build_and_deploy"
 #"$BUILD_DIR/app/scripts/dir_build" -q $PARAMS -p $PLATFORM
