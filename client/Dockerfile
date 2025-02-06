@@ -3,7 +3,8 @@ FROM node:lts
 RUN \
 apt update && \
 apt -y upgrade && \
-apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip-full binutils xz-utils file ncurses-bin
+apt install -y bash git git-lfs python3 rsync openssl perl zip curl p7zip-full binutils xz-utils file ncurses-bin xxd 
+# Missing for windows build: cygpath upx
 
 # Install AWS client
 RUN \

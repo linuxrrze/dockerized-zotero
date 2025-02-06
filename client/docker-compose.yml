@@ -9,8 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./staging/:/staging:rw
-      - ./dist/:/dist:rw
+      - ./output/:/output:rw
       - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
@@ -24,8 +23,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./staging/:/staging:rw
-      - ./dist/:/dist:rw
+      - ./output/:/output:rw
       - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
@@ -39,8 +37,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./staging/:/staging:rw
-      - ./dist/:/dist:rw
+      - ./output/:/output:rw
       - ./build.sh:/build.sh:ro
     env_file: ../.env
     environment:
