@@ -47,7 +47,14 @@ cat "$SOURCE_DIR/app/config.sh"
 sed -i s+'\$DEPLOY_HOST:'+''+ "$SOURCE_DIR/app/scripts/build_and_deploy"
 #sed -i s+'scp '+'echo scp '+ "$SOURCE_DIR/app/scripts/build_and_deploy"
 #sed -i -E s+'scp (.*) (.*)'+'test -f \1 \&\& cp \1 \2 || touch \2'+p "$SOURCE_DIR/app/scripts/build_and_deploy"
-sed -i -E s+'scp (.*) (.*)'+'test -f \1 \&\& cp \1 \2 || cat \2 \&\& echo [] > \2 \&\& cat \2'+p "$SOURCE_DIR/app/scripts/build_and_deploy"
+#sed -i -E s+'scp (.*) (.*)'+'test -f \1 \&\& cp \1 \2 || cat \2 \&\& echo [] > \2 \&\& cat \2'+p "$SOURCE_DIR/app/scripts/build_and_deploy"
+for BUILD_ARCH in x86_64 i686; do
+  JSONFILE=/output/deploy/release/updates-linux-${BUILD_ARCH}.json
+  if [ ! -f "${JSONFILE}" ]; then
+	echo '[]' > "${JSONFILE}"
+  fi
+done
+sed -i -E s+'scp (.*) (.*)'+'cp \1 \2'+p "$SOURCE_DIR/app/scripts/build_and_deploy"
 
 # Disable version_info for now
 #sed -i -E s+'.*add_version_info.*'+'#\0'+ "$SOURCE_DIR/app/scripts/build_and_deploy"
